@@ -1,0 +1,47 @@
+# スクリプト名: gitStagingGet.ps1
+# 正規表現 @author.*
+# @author 上田
+# 一つ前のステージングに戻す git reset --soft HEAD~
+
+# 実行ディレクトリの指定
+$GitRepositoryPath = "C:\repository\tss3cam-map-hmi"
+$TargetBasePath = "C:\work3"
+
+# 現在の日時を使ったフォルダ名の生成
+$Timestamp = Get-Date -Format "yyyyMMddHHmmss"
+$TargetFolderPath = Join-Path -Path $TargetBasePath -ChildPath "git_$Timestamp"
+
+# gitコマンドでステージングされているファイルのフルパスを取得
+Write-Host "Gitリポジトリディレクトリ: $GitRepositoryPath"
+Write-Host "ターゲットフォルダ: $TargetFolderPath"
+
+Push-Location $GitRepositoryPath
+try {
+    $StagedFiles = git diff --cached --name-only | ForEach-Object { Resolve-Path $_ }
+    if (-not $StagedFiles) {
+        Write-Host "ステージングにファイルがありません。" -ForegroundColor Yellow
+        Exit 0
+    }
+
+    # ターゲットフォルダの作成
+    New-Item -ItemType Directory -Path $TargetFolderPath -Force | Out-Null
+
+    # ステージングされているファイルをコピー
+    foreach ($File in $StagedFiles) {
+        $SourcePath = $File.Path
+        $RelativePath = $SourcePath.Substring($GitRepositoryPath.Length).TrimStart('\')
+        $DestinationPath = Join-Path -Path $TargetFolderPath -ChildPath $RelativePath
+
+        # コピー先のディレクトリを作成
+        $DestinationDir = Split-Path -Path $DestinationPath -Parent
+        New-Item -ItemType Directory -Path $DestinationDir -Force | Out-Null
+
+        # ファイルをコピー
+        Copy-Item -Path $SourcePath -Destination $DestinationPath -Force
+    }
+
+    Write-Host "ファイルのコピーが完了しました。" -ForegroundColor Green
+    Write-Host "コピー先ディレクトリ: $TargetFolderPath" -ForegroundColor Cyan
+} finally {
+    Pop-Location
+}
