@@ -1,0 +1,96 @@
+<div class="modal" id="user_edit_dialog" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+  data-bs-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="border-radius: 0;">
+      <div class="modal-body">
+        <!-- エラーメッセージ表示エリア -->
+        <div id="05002_error_message" class="alert alert-danger d-none mt-2 p-2" role="alert"
+          style="max-height: 85px; overflow-y: auto;">
+        </div>
+        <form id="05002_edit_form">
+          <div class="border p-3 mb-3">
+            <div class="form-row">
+              <div class="row mb-3">
+                <!-- ユーザID -->
+                <label for="05002_edit_user_id_item_name_string" class="col-sm-2 col-form-label text-nowrap"
+                  th:text="#{05002_edit_user_id_item_name}"></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="05002_edit_user_id_item_name_string" name="userId"
+                    disabled>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <!-- 名前 -->
+                <label for="05002_edit_user_name_item_name_string" class="col-sm-2 col-form-label text-nowrap"
+                  th:text="#{05002_edit_user_name_item_name}"></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="05002_edit_user_name_item_name_string" name="name" 
+                    placeholder="">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <!-- ロール -->
+                <label for="05002_edit_user_id_item_role_string" class="col-sm-2 col-form-label text-nowrap"
+                  th:text="#{05002_edit_user_role_item_name}"></label>
+                <div class="col-sm-10">
+                  <select class="form-select" id="05002_edit_user_id_item_role_string" name="role">
+                    <option value="1" th:text="#{05002_edit_user_role_system_manager}"></option>
+                    <option value="2" th:text="#{05002_edit_user_role_work_manager}"></option>
+                    <option value="3" th:text="#{05002_edit_user_role_general_worker}"></option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <!-- メールアドレス -->
+                <label for="05002_edit_user_mail_item_name_string" class="col-sm-2 col-form-label text-nowrap"
+                  th:text="#{05002_edit_user_mail_item_name}"></label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="05002_edit_user_mail_item_name_string" name="email" 
+                    placeholder="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border p-3 mb-3">
+            <div class="form-row">
+              <div class="row mb-3">
+                <!-- リセットパスワードの説明 -->
+                <p class="form-text text-danger fw-bold" th:text="#{05002_edit_reset_password_description}"></p>
+                <!-- リセットパスワード -->
+                <label for="05002_edit_reset_password_item_name_string" class="form-label text-nowrap"
+                  th:text="#{05002_edit_reset_password_item_name}"></label>
+                <div class="input-group">
+                  <input type="password" class="form-control" id="05002_edit_reset_password_item_name_string"
+                    name="reset_password" th:placeholder="#{05002_edit_new_password_description}">
+                  <button class="btn btn-outline-secondary" type="button" id="05002_edit_user_unmask_password">
+                    <!-- 目玉アイコン -->
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="d-flex justify-content-between w-100">
+          <!-- キャンセルボタン -->
+          <button type="button" id="05002_edit_cancel_button" class="btn btn-primary"
+            th:text="#{05002_edit_cancel}"></button>
+          <!-- 保存ボタン -->
+          <button type="button" id="05002_edit_save_button" class="btn btn-primary"
+            th:text="#{05002_edit_save}"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  /* デフォルトの目のアイコンを非表示にする */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+</style>
+<script th:src="@{/js/component/t3cmh05002/t3cmh05002.js}" type="module" defer></script>
