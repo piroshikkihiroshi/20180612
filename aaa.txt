@@ -1,0 +1,110 @@
+package com.mapmaster.t3cmh.bean.request;
+
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mapmaster.t3cmh.common.util.MessageUtil;
+import lombok.Data;
+
+/**
+ * ユーザ編集 リクエスト.
+ * 
+ * @author 上田
+ *
+ */
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserEditRequest {
+
+  /**
+   * ユーザID.
+   */
+  @JsonProperty("user_id")
+  private String userId;
+
+  /**
+   * 名前.
+   */
+  @JsonProperty("user_name")
+  private String userName;
+
+  /**
+   * ロール.
+   */
+  @JsonProperty("user_role")
+  private String userRole;
+
+  /**
+   * メールアドレス.
+   */
+  @JsonProperty("user_mail_address")
+  private String userMailAddress;
+
+  /**
+   * リセットパスワード.
+   */
+  @JsonProperty("reset_password")
+  private String resetPassword;
+
+  /**
+   * バリデーション.
+   * 
+   * @return
+   */
+  public List<String> validate() {
+
+    List<String> errorList = new ArrayList<>();
+
+    // 名前
+    if (userName != null && !userName.isEmpty()) {
+      // 桁数チェック
+      if (userName.length() < 1 || userName.length() > 50) {
+        errorList.add(MessageUtil.getMessage("API00000_0005",
+            MessageUtil.getMessage("API05003_0001"), "1", "50"));
+      }
+    }
+
+    // ロール
+    // 定義値チェック
+    if (!userRole.equals("1") && !userRole.equals("2") && !userRole.equals("3")) {
+      errorList
+          .add(MessageUtil.getMessage("API00000_0002", MessageUtil.getMessage("API05003_0002")));
+    }
+
+    // メールアドレス
+    if (userMailAddress != null && !userMailAddress.isEmpty()) {
+      // 桁数チェック
+      if (userMailAddress.length() < 7 || userMailAddress.length() > 255) {
+        errorList.add(MessageUtil.getMessage("API00000_0005",
+            MessageUtil.getMessage("API05003_0003"), "7", "255"));
+      }
+      // フォーマットチェック
+      if (!userMailAddress.matches("^[^@]+@[^@]+\\.[^@]+$")) {
+        errorList
+            .add(MessageUtil.getMessage("API00000_0006", MessageUtil.getMessage("API05003_0003")));
+      }
+    }
+
+    // リセットパスワード
+    if (resetPassword != null && !resetPassword.isEmpty()) {
+      // 桁数チェック
+      if (resetPassword.length() < 6 || resetPassword.length() > 12) {
+        errorList.add(MessageUtil.getMessage("API00000_0005",
+            MessageUtil.getMessage("API05003_0004"), "6", "12"));
+      }
+      // フォーマットチェック 以下の組み合わせ
+      // (?=.*[a-z])：少なくとも1つの小文字を含む
+      // (?=.*[A-Z])：少なくとも1つの大文字を含む
+      // (?=.*\\d)：少なくとも1つの数字を含む
+      // (?=.*[!@#$%^&*()_+\\-=\\[\\]{};':"\\\\|,.<>\\/?])：少なくとも1つの記号を含む
+      if (!resetPassword.matches(
+          "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$")) {
+        errorList
+            .add(MessageUtil.getMessage("API00000_0006", MessageUtil.getMessage("API05003_0004")));
+      }
+    }
+    return errorList;
+  }
+
+}
