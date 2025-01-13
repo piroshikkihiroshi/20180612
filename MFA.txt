@@ -1,0 +1,2 @@
+MFA参考サイト
+https://tukkynote.com/awsmfa-authenticator/
