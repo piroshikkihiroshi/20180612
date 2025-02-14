@@ -1,0 +1,10 @@
+収集計画新規登録ダイアログを開くたびにリンク/ノードIDの列が増え続ける。
+横展開として、各ダイアログ画面を開くたびに不整合（主に同じJSイベントが2回以上登録されていく）が発生しないかも修正する。
+
+
+これが原因っぽい
+C:\repository\tss3cam-map-hmi\tss3cam-map-hmi\t3cmh-web-spring\src\main\resources\static\js\component\t3cmh01003\viewHelper.js
+
+   this.linkNodeRegisterArea.clearElement();
+    this.linkNodeRegisterArea.addElement();
+    
