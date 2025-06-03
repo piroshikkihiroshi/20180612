@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: サンプルAPI
+  description: ユーザ管理用のAPIです。
+  version: "1.0.0"
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /user:
+    post:
+      summary: 特定のユーザを取得
+      parameters:
+        - name: target_id
+          in: query
+          required: true
+          description: 取得するユーザのID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target_id:
+                  type: string
+      responses:
+        '200':
+          description: ユーザ情報の取得成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+        '404':
+          description: ユーザが見つからない
+      x-sample-request:
+        description: サンプルリクエスト
+        value: |
+          {
+            "target_id": "12345"
+          }
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
