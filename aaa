@@ -1,0 +1,19 @@
+●git備忘
+〇現在のブランチを表示
+git branch --show-current
+〇developをローカルブランチにマージ
+git checkout develop
+git pull origin develop
+git checkout ueda_user_register
+git merge develop
+〇新たなブランチを切る
+git checkout -b ueda_user_tmp_register
+〇ブランチ名変更
+git branch -m feature/ueda_user_register
+
+〇リモートブランチをローカルにブランチ切ってチェックアウト
+git checkout -b feature/ueda_user_register_from_develop origin/feature/ueda_user_register_from_develop
+
+〇mavenインストール
+cd C:\repository\tss3cam-map-hmi\tss3cam-map-hmi
+mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true && mvn install -Dmaven.test.skip=true
