@@ -1,0 +1,68 @@
+{
+    "info": {
+        "name": "カード認証基盤API",
+        "description": "カード認証基盤APIのテスト",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "トークン発行（認可コード）",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                    }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "client_id",
+                            "value": "PRD_SAMPLE_CLIENT_0000",
+                            "description": "クライアントシステムの識別子"
+                        },
+                        {
+                            "key": "client_secret",
+                            "value": "KdDneqUCrYi4GxQEgfMSR9Yxr-wt_thd0tZxLZubkhYUakLdtsiId0SJRToiG3mY1BgSP6RrTr9J3xtmi0T6lg",
+                            "description": "クライアントシステムの認証情報"
+                        },
+                        {
+                            "key": "grant_type",
+                            "value": "authorization_code",
+                            "description": "認可フローの種別"
+                        },
+                        {
+                            "key": "redirect_uri",
+                            "value": "https://client.example.com/call_back_url",
+                            "description": "認可応答の返却先のURL"
+                        },
+                        {
+                            "key": "code",
+                            "value": "SplxlOBeZQQYbYS6WxSbIA",
+                            "description": "ユーザーの認証を完了したことを証明するチケット"
+                        },
+                        {
+                            "key": "code_verifier",
+                            "value": "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk",
+                            "description": "認可要求時に作成した値"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "https://ドメイン/oauth2/token",
+                    "protocol": "https",
+                    "host": [
+                        "ドメイン"
+                    ],
+                    "path": [
+                        "oauth2",
+                        "token"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
